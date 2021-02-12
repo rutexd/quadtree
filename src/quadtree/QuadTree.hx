@@ -143,22 +143,22 @@ class QuadTree
         if (subtreeActive(topLeftTree))
         {
             topLeftTree.resetFirstGroup();
-            hasActiveSubtree = true;
+            hasActiveSubtree = hasActiveSubtree || topLeftTree.active;
         }
         if (subtreeActive(topRightTree))
         {
             topRightTree.resetFirstGroup();
-            hasActiveSubtree = true;
+            hasActiveSubtree = hasActiveSubtree || topRightTree.active;
         }
         if (subtreeActive(botLeftTree))
         {
             botLeftTree.resetFirstGroup();
-            hasActiveSubtree = true;
+            hasActiveSubtree = hasActiveSubtree || botLeftTree.active;
         }
         if (subtreeActive(botRightTree))
         {
             botRightTree.resetFirstGroup();
-            hasActiveSubtree = true;
+            hasActiveSubtree = hasActiveSubtree || botRightTree.active;
         }
 
         if (!hasActiveSubtree && objects0Length == 0 && objects1Length == 0)
