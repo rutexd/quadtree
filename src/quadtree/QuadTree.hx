@@ -138,14 +138,30 @@ class QuadTree
         objects0 = null;
         objects0Length = 0;
 
-        if (topLeftTree != null  && topLeftTree.active)     topLeftTree.resetFirstGroup();
-        if (topRightTree != null && topRightTree.active)    topRightTree.resetFirstGroup();
-        if (botLeftTree != null  && botLeftTree.active)     botLeftTree.resetFirstGroup();
-        if (botRightTree != null && botRightTree.active)    botRightTree.resetFirstGroup();
+        var hasActiveSubtree: Bool = false;
 
-        if (!topLeftTree.active && !topRightTree.active
-         && !botLeftTree.active && !botRightTree.active
-         && objects0Length == 0 && objects1Length == 0)
+        if (subtreeActive(topLeftTree))
+        {
+            topLeftTree.resetFirstGroup();
+            hasActiveSubtree = true;
+        }
+        if (subtreeActive(topRightTree))
+        {
+            topRightTree.resetFirstGroup();
+            hasActiveSubtree = true;
+        }
+        if (subtreeActive(botLeftTree))
+        {
+            botLeftTree.resetFirstGroup();
+            hasActiveSubtree = true;
+        }
+        if (subtreeActive(botRightTree))
+        {
+            botRightTree.resetFirstGroup();
+            hasActiveSubtree = true;
+        }
+
+        if (!hasActiveSubtree && objects0Length == 0 && objects1Length == 0)
         {
             // This part of the tree is now empty.
             active = false;
