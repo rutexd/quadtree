@@ -185,6 +185,16 @@ class QuadTree
 
 
     /**
+        Returns the bounds of the quad node.
+        @return A bounding box representing the bounds of the quad tree.
+    **/
+    public function getBounds(): BoundingBox
+    {
+        return cache.recycleBoundingBox(leftEdge, topEdge, rightEdge - leftEdge, botEdge - topEdge);
+    }
+
+
+    /**
         Load objects into the quad tree.
 
         On collisions, objects in `objectGroup` will have their `onOverlap()` method called before
