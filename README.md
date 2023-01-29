@@ -6,6 +6,12 @@ Quadtree
 ====================
 
 
+# FORK 
+FORKED FROM https://gitlab.com/haath/quadtree
+
+---
+
+
 Fast, optimized and configurable collision-detection library with Quad Trees.
 Efficient implementation of the GJK algorithm to support any convex polygon shape, with separate faster handling of specialized cases like between rectangles and points.
 
