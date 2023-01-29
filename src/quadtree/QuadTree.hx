@@ -168,6 +168,21 @@ class QuadTree
         }
     }
 
+    /**
+     * Returns the child nodes of this quad tree. If the tree has not been subdivided, this will return an empty array. 
+     * Can be useful for debugging purposes.
+     * @return Array<QuadTree>
+     */
+    public function getChildNodes(): Array<QuadTree>
+    {
+        var nodes: Array<QuadTree> = [];
+        if (subtreeActive(topLeftTree))  nodes.push(topLeftTree);
+        if (subtreeActive(topRightTree)) nodes.push(topRightTree);
+        if (subtreeActive(botLeftTree))  nodes.push(botLeftTree);
+        if (subtreeActive(botRightTree)) nodes.push(botRightTree);
+        return nodes;
+    }
+
 
     /**
         Load objects into the quad tree.
@@ -260,7 +275,6 @@ class QuadTree
             collisionCheckHere();
         }
     }
-
 
     /**
         Removes the given object from the tree.
