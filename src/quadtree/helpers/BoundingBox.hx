@@ -35,4 +35,9 @@ class BoundingBox implements Rectangle
 
     @IgnoreCover
     public function moveToSeparate(deltaX: Float, deltaY: Float) { }
+
+    
+	public function overlaps(arg0:BoundingBox):Dynamic {
+        return arg0.x < x + width && arg0.x + arg0.width > x && arg0.y < y + height && arg0.y + arg0.height > y;
+	}
 }

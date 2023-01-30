@@ -17,6 +17,7 @@ using quadtree.QuadTreeEx;
 using quadtree.helpers.MathUtils;
 using quadtree.extensions.PointEx;
 using quadtree.extensions.CircleEx;
+using quadtree.extensions.ColliderEx;
 using quadtree.extensions.PolygonEx;
 using quadtree.extensions.MovingPointEx;
 using quadtree.extensions.RectangleEx;
@@ -192,6 +193,46 @@ class QuadTree
     {
         return cache.recycleBoundingBox(leftEdge, topEdge, rightEdge - leftEdge, botEdge - topEdge);
     }
+
+
+    public function getInArea(point: Point, area: Float) {
+        var bounds: BoundingBox = cache.recycleBoundingBox(point.x - area, point.y - area, area * 2, area * 2);
+        var results: Array<Collider> = [];
+        getInAreaRecursive(bounds, results);
+        cache.destroyBoundingBox(bounds);
+        return results;    
+    }
+
+    private function getInAreaRecursive(bounds: BoundingBox, results: Array<Collider>): Array<Collider> {
+        if(this.getBounds().overlaps(bounds) == false) return results;
+        if(this.hasSubdivided){
+            this.topLeftTree.getInAreaRecursive(bounds, results);
+            this.topRightTree.getInAreaRecursive(bounds, results);
+            this.botLeftTree.getInAreaRecursive(bounds, results);
+            this.botRightTree.getInAreaRecursive(bounds, results);
+            return results;
+        }
+
+
+        var node = objects0;
+        var len = objects0Length;
+
+        for(i in 0...len){
+            var item = node.get(i);
+            var bbResult = new BoundingBox(0,0);
+            if(!ColliderEx.getBoundingBox(item, bbResult)){
+                continue;
+            }
+            
+            if (bbResult.overlaps(bounds)) {
+                results.push(item);
+            }
+            node = node.next;
+        }
+
+        return results;
+    }
+
 
 
     /**
