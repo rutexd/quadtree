@@ -215,6 +215,7 @@ class QuadTree
 
         var node = objects0;
         while(node.next != null){
+            trace(node);
             var item = node.item;
             var bbResult = new BoundingBox(0,0);
             if(!ColliderEx.getBoundingBox(item, bbResult)){
