@@ -213,14 +213,12 @@ class QuadTree
             return results;
         }
 
-
         var node = objects0;
-        var len = objects0Length;
-
-        for(i in 0...len){
-            var item = node.get(i);
+        while(node.next != null){
+            var item = node.item;
             var bbResult = new BoundingBox(0,0);
             if(!ColliderEx.getBoundingBox(item, bbResult)){
+                node = node.next;
                 continue;
             }
             
@@ -229,6 +227,7 @@ class QuadTree
             }
             node = node.next;
         }
+
 
         return results;
     }
