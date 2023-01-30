@@ -195,8 +195,8 @@ class QuadTree
     }
 
 
-    public function getInArea(point: Point, area: Float) {
-        var bounds: BoundingBox = cache.recycleBoundingBox(point.x - area, point.y - area, area * 2, area * 2);
+    public function getInArea(x: Float, y: Float, area: Float) {
+        var bounds: BoundingBox = cache.recycleBoundingBox(x - area, y - area, area * 2, area * 2);
         var results: Array<Collider> = [];
         getInAreaRecursive(bounds, results);
         cache.destroyBoundingBox(bounds);
